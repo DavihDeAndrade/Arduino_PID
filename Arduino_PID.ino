@@ -29,7 +29,7 @@ const float SENSOR_TO_EMPTY = SENSOR_TO_BOTTOM - MIN_WATER_HEIGHT; // 11.2cm
 const float SENSOR_TO_FULL = SENSOR_TO_BOTTOM - MAX_WATER_HEIGHT;  // 3.7cm
 
 // PID gains (adjustable)
-double Kp = 1.0, Ki = 1.0, Kd = 1.0;
+double Kp = 15.0, Ki = 1.0, Kd = 6.0;
 PID pid(&currentLevel, &controlSignal, &setpointDistance, Kp, Ki, Kd, REVERSE);
 
 // Time control
@@ -115,17 +115,6 @@ float percentToSensor(float percent) {
   // 0% = EMPTY = 11.2cm (SENSOR_TO_EMPTY)
   // 100% = FULL = 3.7cm (SENSOR_TO_FULL)
   return SENSOR_TO_EMPTY - (percent / 100.0) * (SENSOR_TO_EMPTY - SENSOR_TO_FULL);
-}
-
-// Convert sensor distance to percentage (0-100%)
-float sensorToPercent(float sensorReading) {
-  // Constrain sensor reading to valid range
-  sensorReading = constrain(sensorReading, SENSOR_TO_FULL, SENSOR_TO_EMPTY);
-  
-  // Calculate percentage based on sensor reading
-  // 11.2cm (SENSOR_TO_EMPTY) = 0%
-  // 3.7cm (SENSOR_TO_FULL) = 100%
-  return ((SENSOR_TO_EMPTY - sensorReading) / (SENSOR_TO_EMPTY - SENSOR_TO_FULL)) * 100.0;
 }
 
 // Update setpoint distance based on percentage
