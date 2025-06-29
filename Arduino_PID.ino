@@ -29,7 +29,7 @@ const float SENSOR_TO_EMPTY = SENSOR_TO_BOTTOM - MIN_WATER_HEIGHT; // 11.2cm
 const float SENSOR_TO_FULL = SENSOR_TO_BOTTOM - MAX_WATER_HEIGHT;  // 3.7cm
 
 // PID gains (adjustable)
-double Kp = 10.0, Ki = 5, Kd = 5.0;
+double Kp = 1.0, Ki = 1.0, Kd = 1.0;
 PID pid(&currentLevel, &controlSignal, &setpointDistance, Kp, Ki, Kd, REVERSE);
 
 // Time control
@@ -69,6 +69,9 @@ void setup() {
 }
 
 void loop() {
+  
+  delay(500);
+  
   unsigned long now = millis();
   
   if (now - lastReading >= interval) {
