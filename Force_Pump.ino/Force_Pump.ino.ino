@@ -6,7 +6,7 @@ void setup() {
   digitalWrite(5, HIGH);  // IN1
   digitalWrite(6, LOW);   // IN2
 
-  analogWrite(3, 0);    // ENA com 100/255 (~39% PWM)
+  analogWrite(3, 200);    // ENA com 100/255 (~39% PWM)
 }
 
 void loop() {
